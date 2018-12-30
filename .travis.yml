@@ -19,10 +19,10 @@ script:
   - docker tag quyencm/nginx-docker-react registry.heroku.com/$HEROKU_APP_NAME/web
 
 deploy:
-  provider: script
-  script:
-    - docker push registry.heroku.com/$HEROKU_APP_NAME/web
-    - heroku container:release web --app $HEROKU_APP_NAME
+  provider: heroku
+  run:
+    - "docker push registry.heroku.com/$HEROKU_APP_NAME/web"
+    - "heroku container:release web --app $HEROKU_APP_NAME"
   api_key: 
     secure: "$API_KEY"
   app: "$HEROKU_APP_NAME"
