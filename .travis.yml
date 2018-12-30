@@ -8,7 +8,6 @@ services:
 before_install:
   - wget -qO- https://toolbelt.heroku.com/install.sh | sh
   - docker login -u "$DOCKER_USERNAME" -p $DOCKER_PASSWORD
-  - docker login -u "$HEROKU_USERNAME" -p $HEROKU_PASSWORD registry.heroku.com
 
 install:
   - docker build -t quyencm/nginx-docker-react .
@@ -18,6 +17,8 @@ script:
   - docker run quyencm/docker-react npm run test -- --coverage 
   - docker tag quyencm/nginx-docker-react registry.heroku.com/$HEROKU_APP_NAME/web
   
+before_deploy:
+  - docker login -u "$HEROKU_USERNAME" -p $HEROKU_PASSWORD registry.heroku.com
 
 deploy:
   provider: script
