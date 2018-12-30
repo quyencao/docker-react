@@ -7,8 +7,8 @@ services:
 
 before_install:
   - wget -qO- https://toolbelt.heroku.com/install.sh | sh
-  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-  - echo "$HEROKU_PASSWORD" | docker login -u "$HEROKU_USERNAME" --password-stdin registry.heroku.com
+  - docker login -u "$DOCKER_USERNAME" -p $DOCKER_PASSWORD
+  - docker login -u "$HEROKU_USERNAME" -p $HEROKU_PASSWORD
 
 install:
   - docker build -t quyencm/nginx-docker-react .
